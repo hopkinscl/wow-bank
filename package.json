@@ -1,0 +1,16 @@
+{
+  "name": "personal-banking-app",
+  "version": "1.0.0",
+  "description": "A personal banking application for demo purposes",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000",
+    "dev": "live-server --port=3000"
+  },
+  "keywords": ["banking", "finance", "demo"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
