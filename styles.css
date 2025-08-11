@@ -489,6 +489,157 @@ body.logged-in .logged-in-header {
     color: #6c757d;
 }
 
+/* Account Opening Wizard */
+.account-wizard {
+    padding: 2rem;
+}
+
+.wizard-step {
+    display: none;
+    margin-bottom: 2rem;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+.wizard-step h3 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.account-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.account-option {
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.account-option:hover {
+    border-color: #3498db;
+    background: #f8f9fa;
+}
+
+.account-option.selected {
+    border-color: #3498db;
+    background: #ebf3fd;
+}
+
+.account-option h4 {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+}
+
+.account-option p {
+    margin: 0 0 1rem 0;
+    color: #7f8c8d;
+}
+
+.account-option .rate {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #27ae60;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.wizard-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.verification-info {
+    text-align: center;
+}
+
+.verification-methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.verification-option {
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    padding: 2rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.verification-option:hover {
+    border-color: #3498db;
+    background: #f8f9fa;
+}
+
+.verification-option i {
+    font-size: 2rem;
+    color: #3498db;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.verification-note {
+    background: #e8f5e8;
+    color: #27ae60;
+    padding: 1rem;
+    border-radius: 6px;
+    font-style: italic;
+}
+
+.wizard-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e6ed;
+}
+
+.wizard-progress {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.progress-step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e0e6ed;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.progress-step.active {
+    background: #3498db;
+    color: white;
+}
+
+.progress-step.completed {
+    background: #27ae60;
+    color: white;
+}
+
 h1 {
     margin-bottom: 2rem;
     color: #2c3e50;

@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         setupEventListeners();
+        setupAccountWizard();
     }
 
     function showPublicView() {
@@ -84,15 +85,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (signupBtn) {
-            signupBtn.addEventListener('click', () => {
-                showNotification('Account opening feature coming soon!', 'info');
-            });
+            signupBtn.addEventListener('click', openAccountModal);
         }
 
         openAccountBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                showNotification('Account opening feature coming soon!', 'info');
-            });
+            btn.addEventListener('click', openAccountModal);
         });
 
         // Login modal
@@ -176,6 +173,133 @@ document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById('loginModal');
         if (modal) {
             modal.style.display = 'none';
+        }
+    }
+
+    function openAccountModal() {
+        const modal = document.getElementById('accountModal');
+        if (modal) {
+            modal.style.display = 'block';
+            resetAccountWizard();
+        }
+    }
+
+    function closeAccountModal() {
+        const modal = document.getElementById('accountModal');
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function resetAccountWizard() {
+        // Reset to step 1
+        document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
+        document.getElementById('step1').classList.add('active');
+        
+        // Reset progress
+        document.querySelectorAll('.progress-step').forEach(step => {
+            step.classList.remove('active', 'completed');
+        });
+        document.querySelector('.progress-step').classList.add('active');
+        
+        // Reset navigation
+        document.querySelector('.wizard-back').style.display = 'none';
+        document.querySelector('.wizard-next').style.display = 'inline-block';
+        document.querySelector('.wizard-submit').style.display = 'none';
+        
+        // Clear selections
+        document.querySelectorAll('.account-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        
+        currentStep = 1;
+    }
+
+    let currentStep = 1;
+
+    function setupAccountWizard() {
+        const modal = document.getElementById('accountModal');
+        const closeBtn = document.querySelector('.close-account');
+        const nextBtn = document.querySelector('.wizard-next');
+        const backBtn = document.querySelector('.wizard-back');
+        const submitBtn = document.querySelector('.wizard-submit');
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeAccountModal);
+        }
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeAccountModal();
+            }
+        });
+
+        // Account option selection
+        document.querySelectorAll('.account-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.account-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // Navigation buttons - THIS IS WHERE THE BUG IS!
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                // BUG: This should increment currentStep but it decrements instead!
+                if (currentStep > 1) {
+                    currentStep--; // This should be currentStep++
+                    updateWizardStep();
+                }
+            });
+        }
+
+        if (backBtn) {
+            backBtn.addEventListener('click', function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    updateWizardStep();
+                }
+            });
+        }
+
+        if (submitBtn) {
+            submitBtn.addEventListener('click', function() {
+                showNotification('Account application submitted! We\'ll contact you within 24 hours.', 'success');
+                closeAccountModal();
+            });
+        }
+    }
+
+    function updateWizardStep() {
+        // Hide all steps
+        document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
+        
+        // Show current step
+        document.getElementById(`step${currentStep}`).classList.add('active');
+        
+        // Update progress indicators
+        document.querySelectorAll('.progress-step').forEach((step, index) => {
+            step.classList.remove('active', 'completed');
+            if (index + 1 < currentStep) {
+                step.classList.add('completed');
+            } else if (index + 1 === currentStep) {
+                step.classList.add('active');
+            }
+        });
+        
+        // Update navigation buttons
+        const backBtn = document.querySelector('.wizard-back');
+        const nextBtn = document.querySelector('.wizard-next');
+        const submitBtn = document.querySelector('.wizard-submit');
+        
+        backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+        
+        if (currentStep === 3) {
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'inline-block';
+        } else {
+            nextBtn.style.display = 'inline-block';
+            submitBtn.style.display = 'none';
         }
     }
 

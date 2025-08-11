@@ -177,6 +177,97 @@
                 </div>
             </div>
 
+            <!-- Account Opening Modal -->
+            <div id="accountModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Open Your WowBank Account</h2>
+                        <span class="close-account">&times;</span>
+                    </div>
+                    <div class="account-wizard">
+                        <!-- Step 1: Account Type -->
+                        <div class="wizard-step active" id="step1">
+                            <h3>Choose Your Account Type</h3>
+                            <div class="account-options">
+                                <div class="account-option" data-type="checking">
+                                    <h4>Premium Checking</h4>
+                                    <p>No monthly fees, free ATMs worldwide</p>
+                                    <span class="rate">0.50% APY</span>
+                                </div>
+                                <div class="account-option" data-type="savings">
+                                    <h4>High-Yield Savings</h4>
+                                    <p>Industry-leading interest rates</p>
+                                    <span class="rate">4.25% APY</span>
+                                </div>
+                                <div class="account-option" data-type="investment">
+                                    <h4>Investment Portfolio</h4>
+                                    <p>Professional portfolio management</p>
+                                    <span class="rate">Avg 12.8% Return</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Personal Information -->
+                        <div class="wizard-step" id="step2">
+                            <h3>Personal Information</h3>
+                            <form class="wizard-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" required placeholder="John">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" required placeholder="Doe">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" required placeholder="john.doe@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" required placeholder="(555) 123-4567">
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Step 3: Verification -->
+                        <div class="wizard-step" id="step3">
+                            <h3>Identity Verification</h3>
+                            <div class="verification-info">
+                                <p>For security purposes, we need to verify your identity.</p>
+                                <div class="verification-methods">
+                                    <div class="verification-option">
+                                        <i class="fas fa-id-card"></i>
+                                        <span>Upload Driver's License</span>
+                                    </div>
+                                    <div class="verification-option">
+                                        <i class="fas fa-passport"></i>
+                                        <span>Upload Passport</span>
+                                    </div>
+                                </div>
+                                <p class="verification-note">This is a demo - no actual verification required!</p>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="wizard-navigation">
+                            <button class="btn-secondary wizard-back" style="display: none;">Back</button>
+                            <button class="btn-primary wizard-next">Next</button>
+                            <button class="btn-primary wizard-submit" style="display: none;">Complete Application</button>
+                        </div>
+
+                        <!-- Progress Indicator -->
+                        <div class="wizard-progress">
+                            <div class="progress-step active">1</div>
+                            <div class="progress-step">2</div>
+                            <div class="progress-step">3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Dashboard Section (Hidden initially) -->
             <section id="dashboard" class="section logged-in-section">
                 <h1>Account Overview</h1>
