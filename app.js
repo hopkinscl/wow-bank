@@ -242,12 +242,26 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // Navigation buttons - THIS IS WHERE THE BUG IS!
+        // Navigation buttons
         if (nextBtn) {
             nextBtn.addEventListener('click', function() {
-                // BUG: This should increment currentStep but it decrements instead!
-                if (currentStep > 1) {
-                    currentStep--; // This should be currentStep++
+                console.log('Next button clicked, currentStep:', currentStep);
+                // Check if account type is selected on step 1
+                if (currentStep === 1) {
+                    const selectedAccount = document.querySelector('.account-option.selected');
+                    console.log('Selected account:', selectedAccount);
+                    if (!selectedAccount) {
+                        showNotification('Please select an account type to continue', 'error');
+                        return;
+                    }
+                    // Allow progression from step 1 to step 2
+                    currentStep++;
+                    console.log('Moving to step:', currentStep);
+                    updateWizardStep();
+                } else if (currentStep > 1) {
+                    // Navigate backward on subsequent screens
+                    currentStep--;
+                    console.log('Moving backward to step:', currentStep);
                     updateWizardStep();
                 }
             });
