@@ -1,6 +1,6 @@
 # WowBank - Personal Banking App
 
-A modern, responsive personal banking application built for demo purposes. Features a clean interface inspired by contemporary banking platforms with account management, transfers, and user profile functionality.
+A modern, responsive personal banking application. Features a clean interface inspired by contemporary banking platforms with account management, transfers, and user profile functionality.
 
 ## Features
 
