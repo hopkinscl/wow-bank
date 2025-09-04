@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if user was previously logged in (simple simulation)
         const wasLoggedIn = localStorage.getItem('wowbank_logged_in') === 'true';
         
-        // Initialize dark mode
-        initializeDarkMode();
+
         
         if (wasLoggedIn) {
             loginUser();
@@ -261,12 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Move forward to next step (if not already at the last step)
                 if (currentStep < 3) {
-                    // Bug: after first screen, forward button goes backwards
-                    if (currentStep > 1) {
-                        currentStep--;
-                    } else {
-                        currentStep++;
-                    }
+                    currentStep++;
                     console.log('Moving to step:', currentStep);
                     updateWizardStep();
                 }
@@ -651,47 +645,5 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Dark Mode Functionality
-    function initializeDarkMode() {
-        // Check if dark mode was previously enabled
-        const isDarkMode = localStorage.getItem('wowbank_dark_mode') === 'true';
-        
-        if (isDarkMode) {
-            document.body.classList.add('dark-mode');
-        }
-        
-        // Setup dark mode toggle listeners
-        setupDarkModeToggles();
-    }
 
-    function setupDarkModeToggles() {
-        const publicToggle = document.getElementById('darkModeToggle');
-        const loggedInToggle = document.getElementById('darkModeToggleLoggedIn');
-        
-        if (publicToggle) {
-            publicToggle.addEventListener('click', toggleDarkMode);
-        }
-        
-        if (loggedInToggle) {
-            loggedInToggle.addEventListener('click', toggleDarkMode);
-        }
-    }
-
-    function toggleDarkMode() {
-        const isDarkMode = document.body.classList.toggle('dark-mode');
-        
-        // Save preference to localStorage
-        localStorage.setItem('wowbank_dark_mode', isDarkMode.toString());
-        
-        // Show notification
-        const modeText = isDarkMode ? 'Dark' : 'Light';
-        showNotification(`Switched to ${modeText} mode`, 'info');
-        
-        // Add animation effect to the toggle button
-        const toggleBtn = this;
-        toggleBtn.style.transform = 'rotate(360deg)';
-        setTimeout(() => {
-            toggleBtn.style.transform = '';
-        }, 300);
-    }
 });
