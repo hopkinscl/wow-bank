@@ -258,10 +258,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // Move forward to next step (if not already at the last step)
-                if (currentStep < 3) {
-                    currentStep++;
-                    console.log('Moving to step:', currentStep);
+                // BUG: Forward button actually goes backward
+                if (currentStep > 1) {
+                    currentStep--;
+                    console.log('Moving backward to step:', currentStep);
                     updateWizardStep();
                 }
             });
