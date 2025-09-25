@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if user was previously logged in (simple simulation)
         const wasLoggedIn = localStorage.getItem('wowbank_logged_in') === 'true';
         
-
+        // Initialize dark mode
+        initializeDarkMode();
         
         if (wasLoggedIn) {
             loginUser();
@@ -126,6 +127,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         break;
                 }
             });
+        });
+
+        // Dark mode toggle functionality
+        const darkModeToggles = document.querySelectorAll('.dark-mode-toggle');
+        darkModeToggles.forEach(toggle => {
+            toggle.addEventListener('click', toggleDarkMode);
         });
     }
 
@@ -258,10 +265,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 
-                // BUG: Forward button actually goes backward
-                if (currentStep > 1) {
-                    currentStep--;
-                    console.log('Moving backward to step:', currentStep);
+                // Move forward to next step
+                if (currentStep < 3) {
+                    currentStep++;
+                    console.log('Moving forward to step:', currentStep);
                     updateWizardStep();
                 }
             });
@@ -645,5 +652,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Dark mode functionality
+    function initializeDarkMode() {
+        const isDarkMode = localStorage.getItem('wowbank_dark_mode') === 'true';
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            updateDarkModeIcon(true);
+        }
+    }
+
+    function toggleDarkMode() {
+        const isDarkMode = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('wowbank_dark_mode', isDarkMode);
+        updateDarkModeIcon(isDarkMode);
+        
+        showNotification(
+            isDarkMode ? 'Dark mode enabled' : 'Light mode enabled', 
+            'info'
+        );
+    }
+
+    function updateDarkModeIcon(isDarkMode) {
+        const icons = document.querySelectorAll('.dark-mode-toggle i');
+        icons.forEach(icon => {
+            icon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+        });
+    }
 
 });
